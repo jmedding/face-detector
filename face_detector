@@ -1,0 +1,21 @@
+#!/bin/bash
+# location: /etc/init.d/face_detector
+#
+# sinatra      Startup script for Sinatra server.
+# description: Starts Sinatra as an unprivileged user.
+#
+### BEGIN INIT INFO
+# Provides:          face_detector
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start daemon at boot time
+# Description:       Enable face_detector provided by daemon.
+### END INIT INFO
+
+sudo -u jon /home/jon/fd/controller.rb $1
+RETVAL=$?
+
+exit $RETVAL
+

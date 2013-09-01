@@ -20,6 +20,7 @@
 require 'bundler/setup'
 require 'json'
 require 'sinatra'
+require 'fileutils'
 
 set :port, 2080
 
@@ -29,10 +30,13 @@ end
 
 post "/detect" do
   path = File.join(File.dirname(__FILE__), 'uploads', params['image'][:filename])
-  File.open(path, "w") {|f| f.write(params['image'][:tempfile].read) }
+  File.open(path, "w") {|f| f.write(params['image'][:tempfile].read)}
   
   begin
     output = `./detector #{path}`
+    if output.include?("No face detected")
+      File.rename(path, path + ".undetected")
+    end
     p output
   rescue
     p "I broke"

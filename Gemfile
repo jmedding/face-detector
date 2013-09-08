@@ -3,4 +3,5 @@ gem 'sinatra'
 gem 'json'
 gem 'haml'
 gem 'daemons'
+gem 'thin'
 
